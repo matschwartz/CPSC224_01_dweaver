@@ -7,7 +7,8 @@ public class StatusPanel extends JPanel
 	
 	public StatusPanel()
 	{
-		status.setText("Welcome to Tic Tac Toe!");
+		status = new JLabel("Welcome to Tic Tac Toe!");
+		setBorder(BorderFactory.createEtchedBorder());
 	}
 	
 	public void update(String newText)

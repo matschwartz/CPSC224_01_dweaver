@@ -45,7 +45,7 @@ public class TicTacToeGUI extends JFrame
 		// Add the components to the content pane
 		add(player1);
 		add(player2);
-		add(grid);
+		add(grid, BorderLayout.CENTER);
 		add(buttonPanel);
 		add(status);
 		
