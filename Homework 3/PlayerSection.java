@@ -34,6 +34,16 @@ public class PlayerSection extends JPanel
 		add(losses);
 	}
 	
+	public String getName()
+	{
+		return name.getText();
+	}
+	
+	public void setName(String newName)
+	{
+		name.setText(newName);
+	}
+	
 	public void setWins(int score)
 	{
 		wins.setText(Integer.toString(score));
