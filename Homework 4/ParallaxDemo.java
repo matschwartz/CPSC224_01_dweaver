@@ -1,3 +1,5 @@
+package assignment.pkg4;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,9 +7,10 @@
  */
 
 /**
- * Assignment 4
- * Due 3/25/2019
- * @author Matthew Schwartz, Daniel Weaver
+ *
+ * @authors: Matthew Schwartz and Daneil Weaver
+ * due date: March 25, 2019
+ * assignment #4
  */
 import java.awt.*;
 import java.awt.event.*;
@@ -21,6 +24,9 @@ import javax.swing.Timer;
 
 public class ParallaxDemo
 {
+	//This function create an object of type
+	//parallax motion and adds it to a JFrame
+	//to be displayed in a window
 	public static void main(String args[])
 	{
 		JFrame frame = new JFrame("Parallax Demo");
@@ -43,35 +49,38 @@ public class ParallaxDemo
 
 class ParallaxMotion extends JPanel implements ActionListener
 {
+	//variables for the moving image
    private int delay = 75;
    protected Timer timer;
-
    private int Motionx = 300;	
    private int Motionradius = 15;
-
    private int Motiondx = 2;
    
+   // variables for the outline of a red square
    private int SquareDefaultX = 120; //SquarePanel's X position when initialized
-   private int SquareDefaultY = 160; //SquarePanel's Y position when initialized
+   private int SquareDefaultY = 120; //SquarePanel's Y position when initialized
    private int SquareX = SquareDefaultX;
    private int SquareY = SquareDefaultY;
    private int SquareWidth = 60; // width of rectangle
    private int SquareHeight = 60; // height of rectangle
    
+   //variables for the yellow circle in the background
    private int CircledefaultX = 120; //SquarePanel's X position when initialized
-   private int CircledefaultY = 60; //SquarePanel's Y position when initialized
+   private int CircledefaultY = 35; //SquarePanel's Y position when initialized
    private int CircleX = CircledefaultX;
    private int CircleY = CircledefaultY;
    private int Circlewidth = 60; // width of rectangle
    private int Circleheight = 60; // height of rectangle
 
+   //variables for the three grey rectangles
    private int rectanglesDefaultX = 110;
-   private int rectanglesDefaultY = 180;
+   private int rectanglesDefaultY = 100;
    private int rectanglesX = rectanglesDefaultX;
    private int rectanglesY = rectanglesDefaultY;
    private int rectanglesWidth = 80;
    private int rectanglesHeight = 40;
    
+   // variables for the grass in the forground
    private int linesDefaultX = -150;
    private int linesDefaultYBegin = 210;
    private int linesDefaultYEnd = 220;
@@ -79,69 +88,45 @@ class ParallaxMotion extends JPanel implements ActionListener
    private int linesYBegin = linesDefaultYBegin;
    private int linesYEnd = linesDefaultYEnd;
    
-   private int baseRectDefaultX = -300;
-   private int baseRectDefaultY = 220;
-   private int baseRectX = baseRectDefaultX;
-   private int baseRectY = baseRectDefaultY;
-   private int baseRectWidth = 900;
-   private int baseRectHeight = 45;
-   
-   private int ovalDefaultX = 40;
-   private int ovalDefaultY = 80;
-   private int ovalX = ovalDefaultX;
-   private int ovalY = ovalDefaultY;
-   private int ovalWidth = 90;
-   private int ovalHeight = 30;
-   
-   private int mrDefaultX = 140;
-   private int mrDefaultY = 190;
-   private int mrX = mrDefaultX;
-   private int mrY = mrDefaultY;
-   private int mrWidth = 20;
-   private int mrHeight = 30;
-   
+   // constructor for the class
+   // initalizes timer and mouse listeners
    public ParallaxMotion()
    {
         timer = new Timer(delay, this);
-        timer.start();
-        
+	timer.start();	
         addMouseListener(new MyMouseListener());
         addMouseMotionListener(new MyMouseMotionListener());
    }
 
-   // draw rectangles and arcs
+   // draws all of the shapes
    public void paintComponent( Graphics g )
    {
         super.paintComponent( g );
         
+        //draws the yellow circle
         g.setColor (Color.YELLOW);
         g.fillOval(CircleX, CircleY, Circlewidth, Circleheight);
         
-        g.setColor(Color.WHITE);
-        g.fillOval(ovalX, ovalY, ovalWidth, ovalHeight);
-        g.fillOval(ovalX + 130, ovalY, ovalWidth, ovalHeight);
-        
+        // draws the three gery rectangles
         g.setColor(Color.GRAY);
         g.fillRect(rectanglesX, rectanglesY, rectanglesWidth, rectanglesHeight);
         g.fillRect(rectanglesX - 100, rectanglesY, rectanglesWidth, rectanglesHeight);
         g.fillRect(rectanglesX + 100, rectanglesY, rectanglesWidth, rectanglesHeight);
         
-        g.setColor(Color.MAGENTA);
-        g.fillRect(mrX, mrY, mrWidth, mrHeight);
-        g.fillRect(mrX - 100, mrY, mrWidth, mrHeight);
-        g.fillRect(mrX + 100, mrY, mrWidth, mrHeight);
-        
+        // draws the red outline of a square
         g.setColor (Color.RED);
         g.drawRect(SquareX, SquareY, SquareWidth, SquareHeight);
-
+        
+        //draws all the lines for the grass
         g.setColor(Color.GREEN);
-        g.fillRect(baseRectX, baseRectY, baseRectWidth, baseRectHeight);
-        for(int i = 0; i < 200; i++)
+        for(int i = 0; i < 300; i++)
         {
-        	g.drawLine(linesX + 5 * i, linesYBegin, linesX + 5 * i, linesYEnd);
+        	g.drawLine(linesX + 2 * i, linesYBegin, linesX + 2 * i, linesYEnd);
         }
         
-        
+        // draws the moving blue ball 
+        // also resets the ball when it reaches 
+        // the other side of the panel
         g.setColor(Color.blue);
         if (Motionx == 0){
             Motionx=300;}
@@ -151,10 +136,14 @@ class ParallaxMotion extends JPanel implements ActionListener
    
    public void actionPerformed(ActionEvent e)
    // will run when the timer fires
+   // and repaints the images in their 
+   // new positions based on the mouse
    {
 	repaint();
    }
 
+   // mouse listener class the takes the input from the mouse buttons
+   // and determines what to do with the input
    private class MyMouseListener implements MouseListener
 	{
             public void mouseClicked(MouseEvent e) {
@@ -172,7 +161,8 @@ class ParallaxMotion extends JPanel implements ActionListener
             public void mouseEntered(MouseEvent e) {
 
             }
-
+            // resets the image to the original postion
+            // when the mouse leave the frame
             public void mouseExited(MouseEvent e) {
                     SquareX = SquareDefaultX;
                     SquareY = SquareDefaultY;
@@ -187,34 +177,24 @@ class ParallaxMotion extends JPanel implements ActionListener
                     linesYBegin = linesDefaultYBegin;
                     linesYEnd = linesDefaultYEnd;
                     
-                    baseRectX = baseRectDefaultX;
-                    baseRectY = baseRectDefaultY;
-                    
-                    ovalX = ovalDefaultX;
-                    ovalY = ovalDefaultY;
-                    
-                    mrX = mrDefaultX;
-                    mrY = mrDefaultY;
-                    
                     repaint();
             }
 	}
 	
+        // takes input from the mouse movement and 
+        // determines what to do with it
 	private class MyMouseMotionListener implements MouseMotionListener
 	{
             public void mouseDragged(MouseEvent e) {
 
             }
-
+            // changes where the images are displayed
+            // based on the x axis of the mouse
             public void mouseMoved(MouseEvent e) {
                     SquareX = e.getX() - 30;
-                    CircleX = (e.getX() + 300) / 3 - 30;
+                    CircleX = (e.getX() + 150) / 2 - 30;
                     rectanglesX = (int) ((e.getX() + 75) / 1.5 - 40);
-                    linesX = (int) ((e.getX() - 30) / 0.8) - 500;
-                    baseRectX = (int) ((e.getX() - 30) / 0.8) - 450;
-                    ovalX = (e.getX() + 150) / 2 - 110;
-                    mrX = (int) ((e.getX() + 37.5) / 1.25 - 10);
-                    
+                    linesX = (int) ((e.getX() - 30) / 0.8) - 300;
                     repaint();
                     //can be scaled
                     //formula: (e.getX() + 150 * (divisor - 1)) / divisor - width/2
@@ -222,4 +202,6 @@ class ParallaxMotion extends JPanel implements ActionListener
 	}
    
 }
+
+
 
