@@ -17,5 +17,6 @@ public class ParallaxDemo
 		frame.setSize(300, 300); // set frame size
 		frame.setVisible(true); // display frame
 		// hello world
+		//test edit
 	}
 }
